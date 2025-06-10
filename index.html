@@ -14,7 +14,7 @@
             background-color: #1a1a1a;
             color: #fff;
             margin: 0;
-            min-height: 100vh; /* 支持滑动 */
+            min-height: 100vh;
         }
         #game-container {
             position: relative;
@@ -28,9 +28,10 @@
         }
         .tile {
             position: absolute;
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
             background-size: contain;
+            border: 1px solid #0f0; /* 调试 */
             cursor: pointer;
             user-select: none;
             transition: transform 0.2s;
@@ -58,19 +59,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-size: 32px;
+            background-size: 48px;
             background-position: center;
             background-repeat: no-repeat;
         }
         #character {
             position: absolute;
-            top: -32px;
+            top: -48px;
             width: 16px;
             height: 16px;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAgCAYAAABlWv4PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACCSURBVGhD7ZcxCsMwDEQ//6X/f7SbiQlt3YgQot+A0mVZ9j+EEAAJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiQJ/wF9xz/0gAAAABJRU5ErkJggg==');
-            background-size: 80px 16px;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAAAgCAYAAAAuLXQAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACqSURBVGhD7ZgxCsMwDEQ//6X/f7SbiQlt3YgQot+A0mVZ9j+EEAAJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiQJ/wF+xz/0gAAAABJRU5ErkJggg==');
+            background-size: 112px 16px;
             transition: left 0.3s;
-            border: 1px solid #f00; /* 调试边框 */
+            border: 1px solid #f00; /* 调试 */
         }
         @keyframes walk {
             0% { background-position: 0 0; }
@@ -101,7 +102,7 @@
             border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAAEElEQVR4nGP4z8DAwMCAgQEA4gABNubJ+QAAAABJRU5ErkJggg==') 4;
             display: none;
         }
-        #reset, #restart {
+        #restart {
             margin: 10px;
             padding: 10px 20px;
             font-size: 12px;
@@ -110,21 +111,14 @@
             border: 2px solid #fff;
             cursor: pointer;
         }
-        #reset {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        #reset:hover, #restart:hover {
+        #restart:hover {
             background-color: #ff6666;
         }
     </style>
 </head>
 <body>
     <h1>D了个D</h1>
-    <div id="game-container">
-        <button id="reset">重置</button>
-    </div>
+    <div id="game-container"></div>
     <div id="slot-container">
         <div id="character" class="walking"></div>
         <div id="ddl-line"></div>
@@ -135,11 +129,13 @@
     <script>
         // 任务图标（像素风 SVG base64）
         const tasks = [
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjYiIGhlaWdodD0iNSIgZmlsbD0iIzAwZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI0IiBjeT0iOCIgcj0iMiIgZmlsbD0iI2ZmNCIgc3Ryb2tlPSIjMDAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSIyIiBmaWxsPSIjZmY0IiBzdHJva2U9IiMwMDAiLz48cmVjdCB4PSI2IiB5PSI3IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjNDQ0NDQiLz48L3N2Zz4=', action: -16 }, // 健身
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMgM2w5IDkiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -32 }, // 赶作业
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iOCIgeT0iMiIgd2lkdGg9IjYiIGhlaWdodD0iMTIiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjwvc3ZnPg==', action: -48 }, // 写论文
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik00IDR2N2gyVi02aDJWNmgyViIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -64 } // 小组Pre
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjYiIGhlaWdodD0iNSIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik03IDcgMSAxaDMuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: 0 }, // 玩手机（屏幕+光点）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI0IiBjeT0iOCIgcj0iMiIgZmlsbD0iI2ZmNCIgc3Ryb2tlPSIjMDAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSIyIiBmaWxsPSIjZmY0IiBzdHJva2U9IiMwMDAiLz48cmVjdCB4PSI2IiB5PSI3IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjNDQ0Ii8+PHBhdGggZD0iTTYgNSAyIDJoMiIgZmlsbD0iIzQ0NCIvPjwvc3ZnPg==', action: -16 }, // 健身（哑铃+手臂）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMgM2w5IDkiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTExIDMgMyAxMSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -32 }, // 赶作业（纸+交叉线）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iOCIgeT0iMiIgd2lkdGg9IjYiIGhlaWdodD0iMTIiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0zIDcgOSAxIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==', action: -48 }, // 写论文（书+文字）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik00IDR2N2gyVi02aDJWNmgyViIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -64 }, // 小组Pre（柱状图）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iNCIgZmlsbD0iI2ZmNCIgc3Ryb2tlPSIjMDAwIi8+PHBhdGggZD0iTTYgOCAyIDJoNCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -80 }, // 吃饭（碗+筷子）
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIxMCIgd2lkdGg9IjEyIiBoZWlnaHQ9IjQiIGZpbGw9IiMwMGYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yIDcgMTIgMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -96 } // 睡觉（床+枕头）
         ];
         const slotCapacity = 5;
         let tiles = [];
@@ -158,27 +154,30 @@
 
         // 初始化游戏
         function initGame() {
+            console.log('Initializing game...'); // 调试
             tiles = [];
             slots = [];
             const gameContainer = document.getElementById('game-container');
             slotContainer = document.getElementById('slot-container');
             message = document.getElementById('message');
-            gameContainer.innerHTML = '<button id="reset">重置</button>';
+            gameContainer.innerHTML = '';
             slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="ddl-line"></div>';
             slotContainer.style.backgroundColor = '#4a4a4a';
             message.style.display = 'none';
             character = document.getElementById('character');
+            console.log('Character:', character); // 调试
 
-            // 生成30个图标，每种6个
+            // 生成42个图标，每种6个
             tasks.forEach(task => {
                 for (let i = 0; i < 6; i++) {
-                    const x = 50 + Math.random() * (600 - 100);
-                    const y = 50 + Math.random() * (400 - 100);
-                    const z = Math.floor(Math.random() * 3);
+                    const x = 20 + Math.random() * (600 - 40);
+                    const y = 20 + Math.random() * (400 - 40);
+                    const z = Math.floor(Math.random() * 5); // 更多层级
                     tiles.push({ task, x, y, z, element: null });
                 }
             });
             shuffle(tiles);
+            console.log('Tiles generated:', tiles.length); // 调试
 
             // 渲染图标
             tiles.forEach((tile, index) => {
@@ -190,7 +189,7 @@
                 div.style.backgroundImage = `url(${tile.task.icon})`;
                 div.dataset.index = index;
                 div.addEventListener('click', handleTileClick);
-                div.addEventListener('touchstart', handleTileClick); // 触屏支持
+                div.addEventListener('touchstart', handleTileClick);
                 gameContainer.appendChild(div);
                 tile.element = div;
             });
@@ -201,14 +200,11 @@
                 slot.className = 'slot';
                 slotContainer.appendChild(slot);
             }
-
-            // 绑定重置按钮
-            document.getElementById('reset').addEventListener('click', initGame);
         }
 
         // 处理点击
         function handleTileClick(e) {
-            e.preventDefault(); // 防止触屏默认行为
+            e.preventDefault();
             const index = parseInt(e.target.dataset.index);
             const tile = tiles[index];
             if (!tile || !tile.element) return;
@@ -272,11 +268,11 @@
             const counts = {};
             slots.forEach(slot => {
                 counts[slot.icon] = (counts[slot.icon] || 0) + 1;
-            }));
+            });
 
             for (let icon in counts) {
                 if (counts[icon] >= 3) {
-                    slots = slots.filter(slot => slot.icon !== icon));
+                    slots = slots.filter(slot => slot.icon !== icon);
                     updateSlots();
                 }
             }
@@ -299,7 +295,10 @@
         document.getElementById('restart').addEventListener('click', initGame);
 
         // 初始化
-        window.onload = initGame;
+        setTimeout(() => {
+            initGame();
+            console.log('Game initialized');
+        }, 100); // 延迟确保字体加载
     </script>
 </body>
 </html>
