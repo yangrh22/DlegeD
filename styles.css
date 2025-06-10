@@ -32,9 +32,9 @@ h1 {
     position: absolute;
     width: 32px;
     height: 32px;
-    background-size: cover;
+    background-size: contain; /* 确保图标不拉伸 */
     border: 1px solid #fff;
-    box-shadow: 2px 2px 0 #0f380f; /* 像素风阴影 */
+    box-shadow: 2px 2px 0 #0f380f;
     cursor: pointer;
     user-select: none;
     transition: transform 0.2s;
@@ -47,7 +47,7 @@ h1 {
     position: relative;
     width: 600px;
     height: 80px;
-    background-color: #ffcc99; /* 浅橙色 */
+    background-color: #ffffff; /* 初始白色 */
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
     margin-top: 10px;
@@ -55,13 +55,13 @@ h1 {
     align-items: center;
 }
 .slot {
-    width: 85px; /* 600px ÷ 7 ≈ 85.7px */
+    width: 85px;
     height: 64px;
     border: 2px dashed #444;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: 32px;
+    background-size: contain; /* 确保槽位图标清晰 */
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -99,11 +99,12 @@ h1 {
     font-size: 20px;
     color: #ffffff;
     text-shadow: 2px 2px 0 #ff4040; /* 红色描边 */
-    background-color: #306230; /* Game Boy 深绿 */
+    background-color: #306230; /* 不透明深绿 */
     padding: 20px;
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
     display: none;
+    z-index: 1000; /* 确保覆盖其他内容 */
 }
 #restart {
     font-family: 'Press Start 2P', cursive;
