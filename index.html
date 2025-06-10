@@ -14,39 +14,29 @@
             background-color: #1a1a1a;
             color: #fff;
             margin: 0;
-            min-height: 100vh;
-            overflow: auto;
+            overflow: hidden;
         }
         #game-container {
             position: relative;
             width: 600px;
-            height: 360px;
+            height: 400px;
             background-color: #2e2e2e;
             border: 4px solid #fff;
-            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAEElEQVR42mNkYGDgZ2BhwgIxJAAAU2Y5YQAAAABJRU5ErkJggg==') 4;
-            margin-top: 10px;
-            overflow: hidden;
+            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAAEElEQVR4nGP4z8DAwMCAgQEA4gABNubJ+QAAAABJRU5ErkJggg==') 4;
+            margin-top: 20px;
         }
         .tile {
             position: absolute;
             width: 32px;
             height: 32px;
             background-size: contain;
-            background-repeat: no-repeat;
+            border: 1px solid #fff; /* 调试边框 */
             cursor: pointer;
             user-select: none;
-            transition: transform 0.1s;
+            transition: transform 0.2s;
         }
-        .tile.top-layer {
-            box-shadow: 0 0 4px #fff;
-            opacity: 1;
-        }
-        .tile:not(.top-layer) {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        .tile.top-layer:hover {
-            transform: scale(1.1);
+        .tile:hover {
+            transform: scale(1.2);
             filter: brightness(1.2);
         }
         #slot-container {
@@ -55,7 +45,7 @@
             height: 80px;
             background-color: #4a4a4a;
             border: 4px solid #fff;
-            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAEElEQVR42mNkYGDgZ2BhwgIxJAAAU2Y5YQAAAABJRU5ErkJggg==') 4;
+            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAAEElEQVR4nGP4z8DAwMCAgQEA4gABNubJ+QAAAABJRU5ErkJggg==') 4;
             margin-top: 10px;
             display: flex;
             align-items: center;
@@ -74,23 +64,19 @@
         #character {
             position: absolute;
             top: -32px;
-            left: 40px;
-            width: 32px;
-            height: 32px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgMjU2IDY0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xNiAxNiBoMTYgdi0xNiBoLTE2IHoiIGZpbGw9IiM0Nzg4ZmYiLz48cGF0aCBkPSJNMTYgMjI4IGExMiAxMiAwIDEgMSAwIDI0IGExIDIgMCAxIDEgMCA0IHoiIGZpbGw9IiNmZmYiLz48cGF0aCB4PSIyOCIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzQ3ODhmZiIvPjxwYXRoIGQ9Ik00MCAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjY0IiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiM0Nzg4ZmYiLz48cGF0aCBkPSJNODAgMjI4IGExMiAxMiAwIDEgMSAwIDI0IGExIDIgMCAxIDEgMCA0IHoiIGZpbGw9IiNmZmYiLz48cGF0aCB4PSI5NiIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTEwOCAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjEyOCIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTE0MCAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjE2MCIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTE3MiAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjE5MiIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTIwNCAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjIyNCIgeT0iMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTIzNiAyMjggYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjAiIHk9IjMyIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiM0Nzg4ZmYiLz48cGF0aCBkPSJNMTYgMjYwIGExMiAxMiAwIDEgMSAwIDI0IGExIDIgMCAxIDEgMCA0IHoiIGZpbGw9IiNmZmYiLz48cGF0aCB4PSIzMiIgeT0iMzIiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzQ3ODhmZiIvPjxwYXRoIGQ9Ik00MCAyNjAgYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHg9IjY0IiB5PSIzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTgwIDI2MCBhMTIgMTIgMCAxIDEgMCAyNCBhMSAyIDAgMSAxIDAgNCB6IiBmaWxsPSIjZmZmIi8+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTYgMzIpIiBkPSJNMTYgMTYgaDE2IHYtMTYgaC0xNiB6IiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTEwOCAyNjAgYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOCAzMikiIGQ9Ik0xNiAxNiBoMTYgdi0xNiBoLTE2IHoiIGZpbGw9IiM0Nzg4ZmYiLz48cGF0aCBkPSJNMTQwIDI2MCBhMTIgMTIgMCAxIDEgMCAyNCBhMSAyIDAgMSAxIDAgNCB6IiBmaWxsPSIjZmZmIi8+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTYwIDMyKSIgZD0iTTE2IDE2IGgxNiB2LTE2IGgtMTYgeiIgZmlsbD0iIzQ3ODhmZiIvPjxwYXRoIGQ9Ik0xNzIgMjYwIGExMiAxMiAwIDEgMSAwIDI0IGExIDIgMCAxIDEgMCA0IHoiIGZpbGw9IiNmZmYiLz48cGF0aCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOTIgMzIpIiBkPSJNMTYgMTYgaDE2IHYtMTYgaC0xNiB6IiBmaWxsPSIjNDc4OGZmIi8+PHBhdGggZD0iTTIwNCAyNjAgYTEyIDEyIDAgMSAxIDAgMjQgYTEgMiAwIDEgMSAwIDQgeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIyNCAzMikiIGQ9Ik0xNiAxNiBoMTYgdi0xNiBoLTE2IHoiIGZpbGw9IiM0Nzg4ZmYiLz48cGF0aCBkPSJNMjM2IDI2MCBhMTIgMTIgMCAxIDEgMCAyNCBhMSAyIDAgMSAxIDAgNCB6IiBmaWxsPSIjZmZmIi8+PC9zdmc+');
-            background-size: 256px 64px;
-            background-repeat: no-repeat;
+            width: 16px;
+            height: 16px;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAgCAYAAABlWv4PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADbSURBVGhD7ZkxCsMwDEQ//6X/f3Q3kRFt3YgQov2g0mVZ9j+EEABJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiQJ/wF82z/0gAAAABJRU5ErkJggg==');
+            background-size: 80px 16px;
             transition: left 0.3s;
         }
         @keyframes walk {
             0% { background-position: 0 0; }
-            25% { background-position: -32px 0; }
-            50% { background-position: -64px 0; }
-            75% { background-position: -96px 0; }
-            100% { background-position: 0 0; }
+            50% { background-position: -16px 0; }
+            100% { background-position: -32px 0; }
         }
         #character.walking {
-            animation: walk 0.5s steps(4) infinite;
+            animation: walk 0.6s steps(3) infinite;
         }
         #ddl-line {
             position: absolute;
@@ -98,33 +84,32 @@
             top: 0;
             width: 4px;
             height: 80px;
-            background-color: #f44;
+            background-color: #ff4040;
         }
         #message {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 16px;
-            color: #f44;
+            font-size: 24px;
+            color: #ff4040;
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px;
+            padding: 20px;
             border: 4px solid #fff;
-            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAEElEQVR42mNkYGDgZ2BhwgIxJAAAU2Y5YQAAAABJRU5ErkJggg==') 4;
+            border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAAEElEQVR4nGP4z8DAwMCAgQEA4gABNubJ+QAAAABJRU5ErkJggg==') 4;
             display: none;
-            text-align: center;
         }
         #restart {
-            margin: 10px;
-            padding: 8px 16px;
-            font-size: 10px;
-            background-color: #f44;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 12px;
+            background-color: #ff4040;
             color: #fff;
             border: 2px solid #fff;
             cursor: pointer;
         }
         #restart:hover {
-            background-color: #f66;
+            background-color: #ff6666;
         }
     </style>
 </head>
@@ -136,100 +121,86 @@
     <button id="restart">重新开始</button>
 
     <script>
-        // 定义7种任务
+        // 任务图标（像素风 SVG base64）
         const tasks = [
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMGNmIi8+PHBhdGggZD0iTTEyIDEyIDggMTIgMTIgMTYgMTYgMTYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -128, name: '玩手机' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjAiIHN0cm9rZT0iIzAwMCIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjAiIHN0cm9rZT0iIzAwMCIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAyMCIgZmlsbD0iIzAwMCIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiIGZpbGw9IiMwMGYiLz48L3N2Zz4=', action: -160, name: '健身' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDEwIDIyIDIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yMiAxMCAxMCAyMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iMSIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==', action: -192, name: '赶作业' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTYiIGZpbGw9IiM0MDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMTIiIHk9IjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzQwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTAgMTIgMjAgMTIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -224, name: '写论文' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMTQiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE0IDE0IDE0IDE0IDE4IDEwIDE4IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTE4IDE0IDIyIDE0IDE4IDE4IiBmaWxsPSIjZmZmIi8+PC9zdmc+', action: -160, name: '小组Pre' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjZmYwIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAxMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTIgMjAgMjAgMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTDE2IDEwIDE2IDgiIHN0cm9rZSB0ZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -192, name: '吃饭' },
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiMwN2ZmZiIgc3R5cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTDEwIDE0IDE2IDEwIDE0IDE0IiBmaWxsPSIjZmZmZiIvPjxwYXRoIGQ9Ik0xOCAxMCAyMiAxNCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -224, name: '睡觉' }
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjYiIGhlaWdodD0iNSIgZmlsbD0iIzAwZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI0IiBjeT0iOCIgcj0iMiIgZmlsbD0iI2ZmNCIgc3Ryb2tlPSIjMDAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSIyIiBmaWxsPSIjZmY0IiBzdHJva2U9IiMwMDAiLz48cmVjdCB4PSI2IiB5PSI3IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjNDQ0NDQiLz48L3N2Zz4=', action: -16 }, // 健身
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMgM2w5IDkiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -32 }, // 赶作业
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iOCIgeT0iMiIgd2lkdGg9IjYiIGhlaWdodD0iMTIiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjwvc3ZnPg==', action: -48 }, // 写论文
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik00IDR2N2gyVi02aDJWNmgyViIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -64 } // 小组Pre
         ];
-        const slotCapacity = 7;
+        const slotCapacity = 5;
         let tiles = [];
         let slots = [];
         let character = null;
+        let slotContainer = null;
+        let message = null;
 
-        // 打乱数组
-        function shuffleArray(array) {
+        // 洗牌算法
+        function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
+            return array;
         }
 
         // 初始化游戏
         function initGame() {
-            console.log('初始化游戏...');
             tiles = [];
             slots = [];
-            const gameContainer = document.querySelector('#game-container');
-            const slotContainer = document.querySelector('#slot-container');
-            const messageElement = document.getElementById#message');
+            const gameContainer = document.getElementById('game-container');
+            slotContainer = document.getElementById('slot-container');
+            message = document.getElementById('message');
             gameContainer.innerHTML = '';
-            slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="cloud-line"></div>';
+            slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="ddl-line"></div>';
             slotContainer.style.backgroundColor = '#4a4a4a';
-            messageElement.style.display = 'none';
-            character = document.querySelector('#character');
+            message.style.display = 'none';
 
-            // 生成42个图标（7种×6）
-            tasks.forEach((task) => {
+            // 生成30个图标，每种6个
+            tasks.forEach(task => {
                 for (let i = 0; i < 6; i++) {
-                    const x = 20 + Math.random() * (560 - 40);
-                    const y = 20 + Math.random() * (280 - 40);
-                    const zIndex = Math.floor(Math.random() * 4); // z-index 0-3
-                    tiles.push({ task, x, y, zIndex, element: null });
+                    const x = 50 + Math.random() * (600 - 100);
+                    const y = 50 + Math.random() * (400 - 100);
+                    const z = Math.floor(Math.random() * 3) + 1; // 层级 1-3
+                    tiles.push({ task, x, y, z, element: null });
                 }
             });
-            shuffleArray(tiles);
-            console.log('生成图标：', tiles.length, tiles.map(t => t.task.name));
+            tiles = shuffle(tiles); // 打乱
 
             // 渲染图标
-            updateTiles();
+            tiles.forEach((tile, index) => {
+                const div = document.createElement('div');
+                div.className = 'tile';
+                div.style.left = `${tile.x}px`;
+                div.style.top = `${tile.y}px`;
+                div.style.zIndex = tile.z;
+                div.style.backgroundImage = `url(${tile.task.icon})`;
+                div.dataset.index = index;
+                div.addEventListener('click', handleTileClick);
+                gameContainer.appendChild(div);
+                tile.element = div;
+            });
 
-            // 初始化7个槽
+            // 初始化DDL槽
             for (let i = 0; i < slotCapacity; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'slot';
                 slotContainer.appendChild(slot);
             }
-            console.log('初始化完成：42 图标，7 槽');
+            character = document.getElementById('character');
         }
 
-        // 更新图标（包括顶层检测）
-        function updateTiles() {
-            const gameContainer = document.querySelector('#game-container');
-            gameContainer.innerHTML = '';
-            const maxZIndex = Math.max(...tiles.filter(t => t).map(t => t.zIndex));
-            tiles.forEach((tile, index) => {
-                if (!tile) return;
-                const div = document.createElement('div');
-                div.className = `tile${tile.zIndex === maxZIndex ? ' top-layer' : ''}`;
-                div.style.left = `${tile.x}px`;
-                div.style.top = `${tile.y}px`;
-                div.style.zIndex = tile.zIndex;
-                div.style.backgroundImage = `url(${tile.task.icon})`;
-                div.dataset.index = index;
-                div.addEventListener('click', handleTileClick);
-                div.addEventListener('touchstart', handleTileClick);
-                gameContainer.appendChild(div);
-                tile.element = div;
-                console.log(`渲染图标[${index}]: ${tile.task.name}, x=${tile.x}, y=${tile.y}, z=${tile.zIndex}`);
-            });
-        }
-
-        // 处理点击图标
-        function handleTileClick(event) {
-            event.preventDefault();
-            const index = parseInt(event.target.dataset.index);
+        // 处理图标点击
+        function handleTileClick(e) {
+            const index = parseInt(e.target.dataset.index);
             const tile = tiles[index];
             if (!tile || !tile.element) return;
 
-            // 遮挡检测
+            // 精确遮挡检测
             const rect = tile.element.getBoundingClientRect();
             const isBlocked = tiles.some(other => {
-                if (other && other !== tile && other.element && parseInt(other.element.style.zIndex) > tile.zIndex) {
+                if (other && other.element && other !== tile && other.z > tile.z) {
                     const otherRect = other.element.getBoundingClientRect();
                     return (
                         rect.left < otherRect.right &&
@@ -241,37 +212,43 @@
                 return false;
             });
 
-            console.log(`点击[${index}]: ${tile.task.name}, z=${tile.zIndex}, 阻=${isBlocked}, 槽=${slots.length}/${slotCapacity}`);
             if (!isBlocked && slots.length < slotCapacity) {
                 slots.push(tile.task);
                 tile.element.remove();
                 tiles[index] = null;
                 updateSlots();
                 checkMatches();
-                updateTiles();
                 checkGameState();
             }
         }
 
-        // 更新槽和小人
+        // 更新DDL槽
         function updateSlots() {
             const slotElements = document.querySelectorAll('.slot');
             slotElements.forEach((slot, i) => {
                 slot.style.backgroundImage = slots[i] ? `url(${slots[i].icon})` : '';
             });
 
+            // 更新小人
             const slotCount = slots.length;
             if (slotCount > 0) {
-                character.style.left = `${80 * slotCount + 40}px`;
-                character.style.backgroundPosition = `${slots[slotCount - 1].action} ${slotCount >= 5 ? -32 : 0}px`;
+                character.style.left = `${80 * (slotCount - 1) + 40}px`;
+                character.style.backgroundPosition = `${slots[slotCount - 1].action}px 0`;
             } else {
-                character.style.left = '40px';
-                character.style.backgroundPosition = '0 0';
+                character.style.left = '0px';
+                character.style.backgroundPosition = '0px 0';
             }
 
-            // 槽颜色
-            slotContainer.style.backgroundColor = slotCount <= 4 ? '#4a4a4a' : slotCount <= 6 ? '#f99' : '#f44';
-            console.log(`更新槽：${slotCount} slots，小人位置：${character.style.left}, 帧：${character.style.backgroundPosition}`);
+            // 更新槽颜色和表情
+            if (slotCount <= 1) {
+                slotContainer.style.backgroundColor = '#4a4a4a';
+            } else if (slotCount <= 3) {
+                slotContainer.style.backgroundColor = '#ff9999';
+                character.style.backgroundPosition = `${slots[slotCount - 1].action - 16}px 0`; // 紧张
+            } else {
+                slotContainer.style.backgroundColor = slotCount === slotCapacity ? '#ff3333' : '#ff6666';
+                character.style.backgroundPosition = `${slots[slotCount - 1].action - 32}px 0`; // 恐慌
+            }
         }
 
         // 检查三消
@@ -281,47 +258,32 @@
                 counts[slot.icon] = (counts[slot.icon] || 0) + 1;
             });
 
-            let removed = false;
             for (let icon in counts) {
                 if (counts[icon] >= 3) {
-                    console.log(`消除：${slots.find(s => s.icon === icon).name} x${counts[icon]}`);
-                    slots = slots.filter(s => s.icon !== icon);
-                    removed = true;
+                    slots = slots.filter(slot => slot.icon !== icon);
+                    updateSlots();
                 }
             }
-            if (removed) {
-                updateSlots();
-                checkMatches();
-            }
         }
 
-        // 检查胜负
+        // 检查游戏状态
         function checkGameState() {
-            const messageElement = document.querySelector('#message');
             if (slots.length >= slotCapacity) {
-                messageElement.innerHTML = 'DDL 已过！';
-                messageElement.style.display = 'block';
+                message.innerHTML = 'DDL 已过！';
+                message.style.display = 'block';
                 character.classList.remove('walking');
-                console.log('游戏失败：槽满');
             } else if (tiles.every(t => !t)) {
-                messageElement.innerHTML = '恭喜！赶上 DDL！';
-                messageElement.style.display = 'block';
+                message.innerHTML = '恭喜你赶上DDL！';
+                message.style.display = 'block';
                 character.classList.remove('walking');
-                console.log('游戏胜利：全消');
             }
         }
 
-        // 重置按钮
-        document.querySelector('#restart').addEventListener('click', () => {
-            console.log('重新开始');
-            initGame();
-        });
+        // 重启游戏
+        document.getElementById('restart').addEventListener('click', initGame);
 
-        // 启动
-        setTimeout(() => {
-            initGame();
-            console.log('游戏加载完成');
-        }, 500);
+        // 延迟初始化
+        window.onload = initGame;
     </script>
 </body>
 </html>
