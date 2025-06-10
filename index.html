@@ -37,11 +37,11 @@
             transition: transform 0.2s;
         }
         .tile.top-layer {
-            box-shadow: 0 0 4px #fff;
+            box-shadow: 0 0 3px #fff;
             opacity: 1;
         }
         .tile:not(.top-layer) {
-            opacity: 0.6;
+            opacity: 0.65;
         }
         .tile.top-layer:hover {
             transform: scale(1.1);
@@ -73,11 +73,10 @@
         #character {
             position: absolute;
             top: -32px;
-            left: 0;
             width: 32px;
             height: 32px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTkyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiA0IDRoOCIgZmlsbD0iI2ZmZiIvPjxyZWN0IHg9IjMyIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiMwMGYiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iNjQiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiAtNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iOTYiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiAtNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iMTI4IiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiNmZjQiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjMDAwIi8+PHJlY3QgeD0iMTYwIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiNmZjQiLz48cGF0aCBkPSJNMTYgMTYgLTQgNGg4IiBmaWxsPSIjMDAwIi8+PC9zdmc+');
-            background-size: 192px 32px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjI0IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMjI0IDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiA0IDRoOCIgZmlsbD0iI2ZmZiIvPjxyZWN0IHg9IjMyIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiMwMGYiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iNjQiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiAtNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iOTYiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwZiIvPjxwYXRoIGQ9Ik0xNiAxNiAtNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iMTI4IiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiMwMGYiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iMTYwIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiMwMGYiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iMTkyIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiMwMGYiLz48cGF0aCBkPSJNMTYgMTYgNCAtNGg4IiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+            background-size: 224px 32px;
             transition: left 0.3s;
         }
         @keyframes walk {
@@ -88,7 +87,7 @@
             100% { background-position: 0 0; }
         }
         #character.walking {
-            animation: walk 0.5s steps(4) infinite;
+            animation: walk 0.6s steps(4) infinite;
         }
         #ddl-line {
             position: absolute;
@@ -137,19 +136,20 @@
 
     <script>
         const tasks = [
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMGFmIi8+PHBhdGggZD0iTTEwIDEwIDYgNmg4IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjQiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=', action: 0 }, // 手机
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMGFmIi8+PHBhdGggZD0iTTEwIDEwIDYgNmg4IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjQiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=', action: 0 }, // 玩手机
             { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjYiIHN0cm9rZT0iIzMzMyIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjYiIHN0cm9rZT0iIzMzMyIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAyMCIgZmlsbD0iIzAwMCIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiIGZpbGw9IiMwMGYiLz48L3N2Zz4=', action: -32 }, // 健身
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDEwIDIyIDIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yMiAxMCAxMCAyMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iMSIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==', action: -64 }, // 作业
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTYiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMTIiIHk9IjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTAgMTIgMjAgMTIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -96 }, // 学习
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjZmY2IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAxMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTIgMjAgMjAgMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTE2IDEwIDE2IDgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -128 }, // 吃饭
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiMwYWYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE0IDE2IDEwIDE0IDE0IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTE4IDEwIDIyIDE0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==', action: -160 } // 睡觉
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDEwIDIyIDIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yMiAxMCAxMCAyMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iMSIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==', action: -64 }, // 赶作业
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTYiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMTIiIHk9IjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTAgMTIgMjAgMTIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -96 }, // 写论文
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMTQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE4IDEwIDE0IDE0IDE0IDE0IDE4IDE4IDE4IDE4IDE0IiBmaWxsPSIjZmZmIi8+PC9zdmc+', action: -128 }, // 小组Pre
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjZmY2IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAxMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTIgMjAgMjAgMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTE2IDEwIDE2IDgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -160 }, // 吃饭
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiMwYWYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE0IDE2IDEwIDE0IDE0IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTE4IDEwIDIyIDE0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==', action: -192 } // 睡觉
         ];
         const slotCapacity = 5;
         let tiles = [];
         let slots = [];
         let character = null;
 
-        function shuffleArray(array) {
+        function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
@@ -164,24 +164,25 @@
             const slotContainer = document.getElementById('slot-container');
             const message = document.getElementById('message');
             gameContainer.innerHTML = '';
-            slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="door-line"></div>';
+            slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="ddl-line"></div>';
             slotContainer.style.backgroundColor = '#4a4a4a';
             message.style.display = 'none';
             character = document.getElementById('character');
 
-            // 生成36个图标（6种×6）
-            tasks.forEach(task => {
-                for (let i = 0; i < 6; i++) {
+            // 生成30个图标（7种，约4-5个）
+            const taskCounts = [5, 5, 4, 4, 4, 4, 4]; // 总计30
+            tasks.forEach((task, idx) => {
+                for (let i = 0; i < taskCounts[idx]; i++) {
                     const x = 20 + Math.random() * (560 - 40);
                     const y = 20 + Math.random() * (300 - 40);
-                    const z = Math.floor(Math.random() * 4);
+                    const z = Math.floor(Math.random() * 3);
                     tiles.push({ task, x, y, z, element: null });
                 }
             });
-            shuffleArray(tiles);
+            shuffle(tiles);
             console.log('生成图标：', tiles.length);
 
-            // 渲染图标并检测顶层
+            // 渲染图标，标记顶层
             const maxZ = Math.max(...tiles.map(t => t.z));
             tiles.forEach((tile, index) => {
                 const div = document.createElement('div');
@@ -209,7 +210,7 @@
             e.preventDefault();
             const index = parseInt(e.target.dataset.index);
             const tile = tiles[index];
-            if (!tile) return;
+            if (!tile || !tile.element) return;
 
             const rect = tile.element.getBoundingClientRect();
             const isBlocked = tiles.some(other => {
@@ -275,7 +276,7 @@
                 message.style.display = 'block';
                 character.classList.remove('walking');
             } else if (tiles.every(t => !t)) {
-                message.innerHTML = '恭喜成功！';
+                message.innerHTML = '恭喜赶上DDL！';
                 message.style.display = 'block';
                 character.classList.remove('walking');
             }
