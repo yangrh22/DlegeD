@@ -37,11 +37,12 @@
             transition: transform 0.2s;
         }
         .tile.top-layer {
-            box-shadow: 0 0 3px #fff;
+            box-shadow: 0 0 4px #fff;
             opacity: 1;
         }
         .tile:not(.top-layer) {
-            opacity: 0.65;
+            opacity: 0.6;
+            pointer-events: none; /* 禁用下层点击 */
         }
         .tile.top-layer:hover {
             transform: scale(1.1);
@@ -87,7 +88,7 @@
             100% { background-position: 0 0; }
         }
         #character.walking {
-            animation: walk 0.6s steps(4) infinite;
+            animation: walk 0.5s steps(4) infinite;
         }
         #ddl-line {
             position: absolute;
@@ -135,56 +136,74 @@
     <button id="restart">重新开始</button>
 
     <script>
+        // 定义7种任务
         const tasks = [
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMGFmIi8+PHBhdGggZD0iTTEwIDEwIDYgNmg4IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjQiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=', action: 0 }, // 玩手机
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjYiIHN0cm9rZT0iIzMzMyIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjYiIHN0cm9rZT0iIzMzMyIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAyMCIgZmlsbD0iIzAwMCIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiIGZpbGw9IiMwMGYiLz48L3N2Zz4=', action: -32 }, // 健身
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDEwIDIyIDIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yMiAxMCAxMCAyMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iMSIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==', action: -64 }, // 赶作业
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTYiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMTIiIHk9IjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTAgMTIgMjAgMTIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -96 }, // 写论文
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMTQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE4IDEwIDE0IDE0IDE0IDE0IDE4IDE4IDE4IDE4IDE0IiBmaWxsPSIjZmZmIi8+PC9zdmc+', action: -128 }, // 小组Pre
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjZmY2IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAxMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTIgMjAgMjAgMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTE2IDEwIDE2IDgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -160 }, // 吃饭
-            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiMwYWYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE0IDE2IDEwIDE0IDE0IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTE4IDEwIDIyIDE0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==', action: -192 } // 睡觉
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMGNmIi8+PHBhdGggZD0iTTEyIDEyIDggMTIgMTIgMTYgMTYgMTYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjAiIHN0cm9rZT0iIzAwMCIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiNmZjAiIHN0cm9rZT0iIzAwMCIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAyMCIgZmlsbD0iIzAwMCIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiIGZpbGw9IiMwMGYiLz48L3N2Zz4=', action: -32 }, // 健身
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDEwIDIyIDIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0yMiAxMCAxMCAyMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iMSIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==', action: -64 }, // 赶作业
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTYiIGZpbGw9IiM0MDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMTIiIHk9IjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzQwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMTAgMTIgMjAgMTIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PGNpcmNsZSBjeD0iMTQiIGN5PSIxNiIgcj0iMSIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: -96 }, // 写论文
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjAiIGhlaWdodD0iMTQiIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEwIDE4IDEwIDE0IDE0IDE0IDE0IDE4IDE4IDE4IDE4IDE0IiBmaWxsPSIjZmZmIi8+PC9zdmc+', action: -128 }, // 小组Pre
+            { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpEWdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjZmYwIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiAyMCAxMiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTIgMjAgMjAgMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTE2IDEwIDE2IDgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action=-160}, // 吃饭
+           { icon: 'data:image/svg+xml;base64,PHN2ZyB3MiIzMiIgeG1sbnM7IHN0cm9rZQ==',action=-192} // 睡觉动作
         ];
-        const slotCapacity = 5;
+        const slotCapacity = 7; // 槽位改为7个
         let tiles = [];
         let slots = [];
         let character = null;
 
-        function shuffle(array) {
+        // 打乱数组
+        function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
 
+        // 初始化游戏
         function initGame() {
             console.log('初始化游戏...');
             tiles = [];
             slots = [];
-            const gameContainer = document.getElementById('game-container');
-            const slotContainer = document.getElementById('slot-container');
-            const message = document.getElementById('message');
+            const gameContainer = document.querySelector('#game-container');
+            const slotContainer = document.querySelector('#slot-container');
+            const message = document.querySelector('#message');
             gameContainer.innerHTML = '';
             slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="ddl-line"></div>';
             slotContainer.style.backgroundColor = '#4a4a4a';
             message.style.display = 'none';
-            character = document.getElementById('character');
+            character = document.querySelector('#character');
 
-            // 生成30个图标（7种，约4-5个）
-            const taskCounts = [5, 5, 4, 4, 4, 4, 4]; // 总计30
-            tasks.forEach((task, idx) => {
-                for (let i = 0; i < taskCounts[idx]; i++) {
-                    const x = 20 + Math.random() * (560 - 40);
-                    const y = 20 + Math.random() * (300 - 40);
-                    const z = Math.floor(Math.random() * 3);
+            // 生成42个图标（7种×6）
+            tasks.forEach(task => {
+                for (let i = 0; i < 6; i++) {
+                    const x = 20 + Math.random() * (560 - 32);
+                    const y = 20 + Math.random() * (320 - 32);
+                    const z = Math.floor(Math.random() * 4); // z-index 0-3
                     tiles.push({ task, x, y, z, element: null });
                 }
             });
-            shuffle(tiles);
+            shuffleArray(tiles);
             console.log('生成图标：', tiles.length);
 
-            // 渲染图标，标记顶层
-            const maxZ = Math.max(...tiles.map(t => t.z));
+            // 渲染游戏图标并标记顶层
+            updateTiles();
+
+            // 初始化7个槽
+            for (let i = 0; i < slotCapacity; i++) {
+                const div = document.createElement('div');
+                div.classList.add('slot');
+                slotContainer.appendChild(div);
+            }
+            console.log('初始化完成，42个图标，7个槽');
+        }
+
+        // 更新游戏图标显示（包括顶层检测）
+        function updateTiles() {
+            const gameContainer = document.querySelector('#game-container');
+            gameContainer.innerHTML = ''; // 清空容器
+            const maxZ = Math.max(...tiles.filter(t => t).map(t => t.z)); // 找到最大z-index
             tiles.forEach((tile, index) => {
+                if (!tile) return;
                 const div = document.createElement('div');
                 div.className = 'tile' + (tile.z === maxZ ? ' top-layer' : '');
                 div.style.left = `${tile.x}px`;
@@ -197,21 +216,16 @@
                 gameContainer.appendChild(div);
                 tile.element = div;
             });
-
-            // 初始化DDL槽
-            for (let i = 0; i < slotCapacity; i++) {
-                const slot = document.createElement('div');
-                slot.className = 'slot';
-                slotContainer.appendChild(slot);
-            }
         }
 
+        // 处理图标点击
         function handleTileClick(e) {
             e.preventDefault();
             const index = parseInt(e.target.dataset.index);
             const tile = tiles[index];
             if (!tile || !tile.element) return;
 
+            // 遮挡判断
             const rect = tile.element.getBoundingClientRect();
             const isBlocked = tiles.some(other => {
                 if (other && other !== tile && other.element && parseInt(other.element.style.zIndex) > tile.z) {
@@ -226,17 +240,19 @@
                 return false;
             });
 
-            console.log(`点击图标: z=${tile.z}, 阻挡=${isBlocked}`);
+            console.log(`点击图标：z=${tile.z}, 阻挡=${isBlocked}, 槽位=${slots.length}/${slotCapacity}`);
             if (!isBlocked && slots.length < slotCapacity) {
                 slots.push(tile.task);
                 tile.element.remove();
                 tiles[index] = null;
                 updateSlots();
                 checkMatches();
+                updateTiles(); // 刷新顶层图标
                 checkGameState();
             }
         }
 
+        // 更新槽位、小人位置和动作
         function updateSlots() {
             const slotElements = document.querySelectorAll('.slot');
             slotElements.forEach((slot, i) => {
@@ -246,47 +262,64 @@
             const slotCount = slots.length;
             if (slotCount > 0) {
                 character.style.left = `${80 * slotCount + 40}px`;
-                character.style.backgroundPosition = `${slots[slotCount - 1].action}${slotCount >= 2 ? ' -32' : ' 0'}px 0`;
+                character.style.backgroundPosition = `${slots[slotCount - 1].action}${slotCount >= 3 ? ' -32' : ' 0'}px 0`; // 3+槽紧张
             } else {
                 character.style.left = '40px';
                 character.style.backgroundPosition = '0 0';
             }
 
-            slotContainer.style.backgroundColor = slotCount <= 1 ? '#4a4a4a' : slotCount <= 3 ? '#f99' : '#f33';
+            // 槽颜色渐变
+            slotContainer.style.backgroundColor = slotCount <= 2 ? '#4a4a4a' : slotCount <= 5 ? '#f99' : '#f44';
+            console.log(`更新槽：${slotCount} slots, character at ${character.style.left}`);
         }
 
+        // 检查三消
         function checkMatches() {
             const counts = {};
             slots.forEach(slot => {
-                counts[slot.icon] = (counts[slot.icon] || 0) + 1;
+                counts[slot.icon] = (counts[icon] || 0) + 1;
             });
 
+            let removed = false;
             for (let icon in counts) {
                 if (counts[icon] >= 3) {
+                    console.log(`消除：${icon} x${counts[icon]}`);
                     slots = slots.filter(slot => slot.icon !== icon);
-                    updateSlots();
+                    removed = true;
                 }
             }
-        }
-
-        function checkGameState() {
-            const message = document.getElementById('message');
-            if (slots.length >= slotCapacity) {
-                message.innerHTML = 'DDL已过！';
-                message.style.display = 'block';
-                character.classList.remove('walking');
-            } else if (tiles.every(t => !t)) {
-                message.innerHTML = '恭喜赶上DDL！';
-                message.style.display = 'block';
-                character.classList.remove('walking');
+            if (removed) {
+                updateSlots();
+                checkMatches(); // 递归检查连续消除
             }
         }
 
-        document.getElementById('restart').addEventListener('click', initGame);
+        // 检查游戏状态
+        function checkGameState() {
+            const message = document.querySelector('#message');
+            if (slots.length >= slotCapacity) {
+                message.innerHTML = 'DDL 已过！';
+                message.style.display = 'flex';
+                character.classList.remove('walking');
+                console.log('游戏失败：槽满');
+            } else if (tiles.every(t => !t)) {
+                message.innerHTML = '恭喜！成功赶上 DDL！';
+                message.style.display = 'flex';
+                character.classList.remove('walking');
+                console.log('游戏胜利：全消');
+            }
+        }
 
+        // 绑定重置按钮
+        document.querySelector('#restart').addEventListener('click', () => {
+            console.log('重新开始游戏');
+            initGame();
+        });
+
+        // 启动游戏
         setTimeout(() => {
             initGame();
-            console.log('游戏已加载');
+            console.log('游戏加载完成');
         }, 100);
     </script>
 </body>
