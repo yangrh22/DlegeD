@@ -3,8 +3,8 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Press Start 2P', cursive;
-    background-color: #9bbc0f; /* Game Boy 浅绿 */
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADSSURBVFhH7ZaxDcIwEEV9/0P7H7oLomAbY6CwgWIIpBIsQSA2kGwS2aR3yS4k8ZZky7Js+/vmm2Q+1zkAAGzbts0P+wDA22+/nTIAgF6vV1ar1R8A8Hg8Hs/z+ADAtu3pdrvdtwEAnud53W63+3gAALfb7eFw+BIAwDAMwzCMdxgA2O12m8PhsAQA2O12O5/PtwMA2O12Op1OtwMA2O12O51OtwMA2O12O53OtwMA2O12O51OtwMA2O12O53OtwMA2O12O51OtwMA2O12O53OtwMA2O12O50OtwMAANj/AK+3K/8N5rY3AAAAAElFTkSuQmCC'); /* 像素风书桌背景 */
+    background-color: #9bbc0f;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADSSURBVFhH7ZaxDcIwEEV9/0P7H7oLomAbY6CwgWIIpBIsQSA2kGwS2aR3yS4k8ZZky7Js+/vmm2Q+1zkAAGzbts0P+wDA22+/nTIAgF6vV1ar1R8A8Hg8Hs/z+ADAtu3pdrvdtwEAnud53W63+3gAALfb7eFw+BIAwDAMwzCMdxgA2O12m8PhsAQA2O12O5/PtwMA2O12Op1OtwMA2O12O51OtwMA2O12O53OtwMA2O12O51OtwMA2O12O53OtwMA2O12O51OtwMA2O12O53OtwMA2O12O50OtwMAANj/AK+3K/8N5rY3AAAAAElFTkSuQmCC');
     background-size: 32px 32px;
     color: #fff;
     margin: 0;
@@ -13,19 +13,19 @@ body {
 h1 {
     font-family: 'Press Start 2P', cursive;
     font-size: 24px;
-    color: #ffff00; /* 亮黄色 */
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000; /* 黑色描边 */
+    color: #ffff00;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
     margin: 20px 0;
 }
 #game-container {
     position: relative;
     width: 600px;
     height: 400px;
-    background-color: #8bac0f; /* Game Boy 米黄 */
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAJ0lEQVR4nGP4//8/A7mJiYkBBv7//38GEI+MjAxAzMzM/4yMDL8ZGBgAdK8gZQAAAABJRU5ErkJggg=='); /* 像素网格 */
+    background-color: #8bac0f;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAJ0lEQVR4nGP4//8/A7mJiYkBBv7//38GEI+MjAxAzMzM/4yMDL8ZGBgAdK8gZQAAAABJRU5ErkJggg==');
     background-size: 8px 8px;
     border: 4px solid #fff;
-    border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8; /* 像素风边框 */
+    border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
     margin-top: 20px;
 }
 .tile {
@@ -33,9 +33,9 @@ h1 {
     width: 32px;
     height: 32px;
     background-size: contain;
-    background-color: #ffffff; /* 白色背景增强对比 */
-    border: 1px solid #000; /* 黑色边框 */
-    box-shadow: 2px 2px 0 #0f380f;
+    background-color: #ffffff;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 2px #0f380f, -1px -1px 1px #ffffff; /* 双层阴影 */
     cursor: pointer;
     user-select: none;
     transition: transform 0.2s;
@@ -48,7 +48,7 @@ h1 {
     position: relative;
     width: 600px;
     height: 80px;
-    background-color: #ffffff !important; /* 强制初始白色 */
+    background-color: #ffffff; /* 初始白色 */
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
     margin-top: 10px;
@@ -62,7 +62,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: contain; /* 确保槽位图标清晰 */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -99,20 +99,20 @@ h1 {
     font-family: 'Press Start 2P', cursive;
     font-size: 20px;
     color: #ffffff;
-    text-shadow: 2px 2px 0 #ff4040; /* 红色描边 */
-    background-color: #306230; /* 不透明深绿 */
+    text-shadow: 2px 2px 0 #ff4040;
+    background-color: #306230;
     padding: 20px;
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
     display: none;
-    z-index: 1000; /* 确保覆盖其他内容 */
+    z-index: 1000;
 }
 #restart {
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;
     margin-top: 20px;
     padding: 12px 24px;
-    background-color: #ff9900; /* 橙色 */
+    background-color: #ff9900;
     color: #ffffff;
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzExMTMwMDD8DYAZZ/z/AKyoc3gAAAAASUVORK5CYII=') 8;
@@ -120,6 +120,6 @@ h1 {
     transition: transform 0.2s, background-color 0.2s;
 }
 #restart:hover {
-    background-color: #ffcc66; /* 浅橙 */
+    background-color: #ffcc66;
     transform: scale(1.1);
 }
