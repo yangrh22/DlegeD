@@ -1,12 +1,12 @@
 // 任务图标（像素风 32x32 SVG base64）
 const tasks = [
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDBmIi8+PHJlY3QgeD0iMTAiIHk9IjI0IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSIyNCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iIzg4OCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iMTAiIHk9IjE0IiB3aWR0aD0iMTIiIGhlaWdodD0iNCIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iMjQiIHk9IjEyIiB3aWR0aD0iNCIgaGVpZ2h0PSI4IiBmaWxsPSIjODg4IiBzdHJva2U9IiNmZmYiLz48L3N2Zz4=', action: -16 }, // 健身
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTggOGgxNnYyaC0xNnpNOCAxMmgxNnYyaC0xNnoiIGZpbGw9IiMwMDAiLz48cmVjdCB4PSIxMiIgeT0iMjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIGZpbGw9IiNmNDQiIHN0cm9rZT0iIzAwMCIvPjwvc3ZnPg==', action: -32 }, // 赶作业
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSI2IiB3aWR0aD0iMjQiIGhlaWdodD0iNiIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMDAwIi8+PHJlY3QgeD0iNCIgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjZWVlIiBzdHJva2U9IiMwMDAiLz48cmVjdCB4PSI0IiB5PSIxOCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNkZGQiIHN0cm9rZT0iIzAwMCIvPjxwYXRoIGQ9Ik02IDhoMjB2Mmg1LTIwdnpNNiAxNGgyMHYyaC0yMHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=', action: -48 }, // 写论文
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iMjQiIGhlaWdodD0iMjAiIGZpbGw9IiMwMGZmMDAiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik02IDZoMTJ2MTJoLTEyem0xMCA2djYxMiwwaDEyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==', action: -64 }, // 小组Pre（亮绿色）
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI4IiB5PSIxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjgiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTQiIHI9IjIiIGZpbGw9IiNmNDQiLz48cmVjdCB4PSIxMiIgeT0iMTgiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIGZpbGw9IiNiN2I3MDEiIHN0cm9rZT0iIzAwMCIvPjwvc3ZnPg==', action: -80 }, // 吃饭
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik04IDE0aDE2diIgc3Ryb2tlPSIjZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSIyIiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+', action: -96 } // 睡觉
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMzMzMiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDAwMGZmIi8+PHJlY3QgeD0iMTAiIHk9IjI0IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjZmZmZmZmIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSIyNCIgcj0iMiIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iIzg4ODg4OCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCB4PSIxMCIgeT0iMTQiIHdpZHRoPSIxMiIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxyZWN0IHg9IjI0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iIzg4ODg4OCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=', action: -16 }, // 健身
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTggOGgxNnYyaC0xNnpNOCAxMmgxNnYyaC0xNnoiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMiIgeT0iMjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZjAwMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+', action: -32 }, // 赶作业
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSI2IiB3aWR0aD0iMjQiIGhlaWdodD0iNiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCB4PSI0IiB5PSIxMiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNlZWVlZWUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iNCIgeT0iMTgiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjZGRkZGRkIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik02IDhoMjB2MmgtMjB6TTYgMTRoMjB2MmgtMjB6IiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+', action: -48 }, // 写论文
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iMjQiIGhlaWdodD0iMjAiIGZpbGw9IiMwMGZmMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iI2ZmZmZmZiIvPjxyZWN0IHg9IjEyIiB5PSI4IiB3aWR0aD0iNCIgaGVpZ2h0PSIxMiIgZmlsbD0iI2ZmZmZmZiIvPjxyZWN0IHg9IjE2IiB5PSI4IiB3aWR0aD0iNCIgaGVpZ2h0PSI2IiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+', action: -64 }, // 小组Pre
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI4IiB5PSIxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjgiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNCIgcj0iMiIgZmlsbD0iI2ZmMDAwMCIvPjxyZWN0IHg9IjEyIiB5PSIxOCIgd2lkdGg9IjgiIGhlaWdodD0iNCIgZmlsbD0iI2ZmZmYwMCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=', action: -80 }, // 吃饭
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiM4ODg4ODgiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSI0IiBmaWxsPSIjZmZmZmZmIi8+PHJlY3QgeD0iOCIgeT0iMTQiIHdpZHRoPSIxNiIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwMGZmIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==', action: -96 } // 睡觉
 ];
 const slotCapacity = 7;
 let tiles = [];
@@ -35,6 +35,7 @@ function initGame() {
     slotContainer.innerHTML = '<div id="character" class="walking"></div><div id="ddl-line"></div>';
     slotContainer.style.backgroundColor = '#ffffff';
     message.style.display = 'none';
+    console.log('Game initialized, slot container color:', slotContainer.style.backgroundColor);
 
     // 生成42个图标（7种 × 6个）
     tasks.forEach(task => {
@@ -119,13 +120,18 @@ function updateSlots() {
     }
 
     // 更新槽颜色和表情
-    const rStart = 255, gStart = 255, bStart = 255; // 白色 #ffffff
-    const rEnd = 255, gEnd = 51, bEnd = 51; // 红色 #ff3333
-    const t = slotCount / slotCapacity; // 0到1的插值因子
-    const r = Math.round(rStart + (rEnd - rStart) * t);
-    const g = Math.round(gStart + (gEnd - gStart) * t);
-    const b = Math.round(bStart + (bEnd - bStart) * t);
-    slotContainer.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    if (slotCount === 0) {
+        slotContainer.style.backgroundColor = '#ffffff';
+    } else {
+        const rStart = 255, gStart = 255, bStart = 255; // 白色 #ffffff
+        const rEnd = 255, gEnd = 51, bEnd = 51; // 红色 #ff3333
+        const t = slotCount / slotCapacity; // 0到1的插值因子
+        const r = Math.round(rStart + (rEnd - rStart) * t);
+        const g = Math.round(gStart + (gEnd - gStart) * t);
+        const b = Math.round(bStart + (bEnd - bStart) * t);
+        slotContainer.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+    console.log('Slot count:', slotCount, 'Container color:', slotContainer.style.backgroundColor);
 }
 
 // 检查三消
