@@ -1,12 +1,14 @@
-// 任务图标（像素风 SVG base64）
+// 任务图标（像素风 32x32 SVG base64）
 const tasks = [
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiM0NDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjYiIGhlaWdodD0iNSIgZmlsbD0iIzAwZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI0IiBjeT0iOCIgcj0iMiIgZmlsbD0iI2ZmNCIgc3Ryb2tlPSIjMDAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSIyIiBmaWxsPSIjZmY0IiBzdHJva2U9IiMwMDAiLz48cmVjdCB4PSI2IiB5PSI3IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjNDQ0NDQiLz48L3N2Zz4=', action: -16 }, // 健身
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMgM2w5IDkiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+', action: -32 }, // 赶作业
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iOCIgeT0iMiIgd2lkdGg9IjYiIGhlaWdodD0iMTIiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjwvc3ZnPg==', action: -48 }, // 写论文
-    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpb CamilaG4wIiBzdHJva2U9IiNmZmYiLz48cGF0aCBkPSJNNCA0djdoMnYxLTZoMnY2aDJ2MSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=', action: -64 } // 小组Pre
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiMzMzMiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iOCIgeT0iNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDBmIi8+PHJlY3QgeD0iMTAiIHk9IjI0IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMjIiIGN5PSIyNCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==', action: 0 }, // 玩手机
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iIzg4OCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iMTAiIHk9IjE0IiB3aWR0aD0iMTIiIGhlaWdodD0iNCIgZmlsbD0iIzQ0NCIgc3Ryb2tlPSIjZmZmIi8+PHJlY3QgeD0iMjQiIHk9IjEyIiB3aWR0aD0iNCIgaGVpZ2h0PSI4IiBmaWxsPSIjODg4IiBzdHJva2U9IiNmZmYiLz48L3N2Zz4=', action: -16 }, // 健身
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMjQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTggOGgxNnYyaC0xNnpNOCAxMmgxNnYyaC0xNnoiIGZpbGw9IiMwMDAiLz48cmVjdCB4PSIxMiIgeT0iMjAiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIGZpbGw9IiNmNDQiIHN0cm9rZT0iIzAwMCIvPjwvc3ZnPg==', action: -32 }, // 赶作业
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0IiB5PSI2IiB3aWR0aD0iMjQiIGhlaWdodD0iNiIgZmlsbD0iI2Z2ZiZmYiIHN0cm9rZT0iIzAwMCIvPjxwY2VjdCB4PSI0IiB5PSIxMiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNlZWUiIHN0cm9rZT0iIzAwMCIvPjxwY2VjdCB4PSI0IiB5PSIxOCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNkZGQiIHN0cm9rZT0iIzAwMCIvPjxwYXRoIGQ9Ik02IDhoMjB2Mmg1LTIwZnpNOCAxNGgyMHYyaC0yMHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=', action: -48 }, // 写论文
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI4IiB5PSI0IiB3aWR0aD0iMjQiIGhlaWdodD0iMjAiIGZpbGw9IiMwYTAiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik02IDZ2MTAxMnpM4IDEwaDE2diI2aDE0IiBmaWxsPSJub25lIiBzdH0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+', action: -64 }, // 小组Pre
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI4IiB5PSIxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjgiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTQiIHI9IjIiIGZpbGw9IiNmNDQiLz48cmVjdCB4PSIxMiIgeT0iMTgiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIGZpbGw9IiNiN2I3MDEiIHN0cm9rZT0iIzAwMCIvPjwvc3ZnPg==', action: -80 }, // 吃饭
+    { icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI2IiB5PSIxMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIGZpbGw9IiM4ODgiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik08IDE0aDE2diIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjgiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=', action: -96 } // 睡觉
 ];
-const slotCapacity = 5;
+const slotCapacity = 7;
 let tiles = [];
 let slots = [];
 let character = null;
@@ -34,7 +36,7 @@ function initGame() {
     slotContainer.style.backgroundColor = '#4a4a4a';
     message.style.display = 'none';
 
-    // 生成30个图标，每种6个
+    // 生成42个图标（7种 × 6个）
     tasks.forEach(task => {
         for (let i = 0; i < 6; i++) {
             const x = 50 + Math.random() * (600 - 100);
@@ -43,7 +45,7 @@ function initGame() {
             tiles.push({ task, x, y, z, element: null });
         }
     });
-    tiles = shuffle(tiles); // 打乱
+    tiles = shuffle(tiles);
 
     // 渲染图标
     tiles.forEach((tile, index) => {
@@ -59,7 +61,7 @@ function initGame() {
         tile.element = div;
     });
 
-    // 初始化DDL槽
+    // 初始化 DDL 槽（7 个）
     for (let i = 0; i < slotCapacity; i++) {
         const slot = document.createElement('div');
         slot.className = 'slot';
@@ -74,7 +76,7 @@ function handleTileClick(e) {
     const tile = tiles[index];
     if (!tile || !tile.element) return;
 
-    // 精确遮挡检测
+    // 精确遮盖检测
     const rect = tile.element.getBoundingClientRect();
     const isBlocked = tiles.some(other => {
         if (other && other.element && other !== tile && other.z > tile.z) {
@@ -99,7 +101,7 @@ function handleTileClick(e) {
     }
 }
 
-// 更新DDL槽
+// 更新 DDL 槽
 function updateSlots() {
     const slotElements = document.querySelectorAll('.slot');
     slotElements.forEach((slot, i) => {
@@ -109,7 +111,7 @@ function updateSlots() {
     // 更新小人
     const slotCount = slots.length;
     if (slotCount > 0) {
-        character.style.left = `${80 * (slotCount - 1) + 40}px`;
+        character.style.left = `${85 * (slotCount - 1) + 42.5}px`; // 居中调整
         character.style.backgroundPosition = `${slots[slotCount - 1].action}px 0`;
     } else {
         character.style.left = '0px';
@@ -117,9 +119,9 @@ function updateSlots() {
     }
 
     // 更新槽颜色和表情
-    if (slotCount <= 1) {
+    if (slotCount <= 3) {
         slotContainer.style.backgroundColor = '#4a4a4a';
-    } else if (slotCount <= 3) {
+    } else if (slotCount <= 5) {
         slotContainer.style.backgroundColor = '#ff9999';
         character.style.backgroundPosition = `${slots[slotCount - 1].action - 16}px 0`; // 紧张
     } else {
