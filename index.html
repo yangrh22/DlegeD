@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D了个D - 大学生DDL挑战</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            overflow: hidden;
+        }
+        #game-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #fff;
+            border: 2px solid #333;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .tile {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+        .tile:hover {
+            transform: scale(1.1);
+        }
+        #slot-container {
+            position: relative;
+            width: 600px;
+            height: 80px;
+            background-color: #fff;
+            border: 2px solid #333;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .slot {
+            width: 80px;
+            height: 60px;
+            border: 1px dashed #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+        #character {
+            position: absolute;
+            top: -40px;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            text-align: center;
+            transition: left 0.3s, transform 0.3s;
+        }
+        #ddl-line {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            width: 2px;
+            height: 80px;
+            background-color: red;
+        }
+        #message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: red;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        #restart {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>D了个D - 大学生DDL挑战</h1>
+    <div id="game-container"></div>
+    <div id="slot-container">
+        <div id="character">😊</div>
+        <div id="ddl-line"></div>
+    </div>
+    <div id="message"></div>
+    <button id="restart">重新开始</button>
+
+    <script>
+        // 游戏核心逻辑
+        const tasks = [
+            { icon: '📱', action: '😆' }, // 玩手机
+            { icon: '🏋️', action: '💪' }, // 健身
+            { icon: '📝', action: '✍️' }, // 赶作业
+            { icon: '📚', action: '💻' }, // 写论文
+            { icon: '📊', action: '📈' }  // 小组Pre
+        ];
+        const slotCapacity = 7;
+        let tiles = [];
+        let slots = [];
+        let character = document.getElementById('character');
+        let slotContainer = document.getElementById('slot-container');
+        let message = document.getElementById('message');
+
+        // 初始化游戏
+        function initGame() {
+            tiles = [];
+            slots = [];
+            document.getElementById('game-container').innerHTML = '';
+            slotContainer.style.backgroundColor = '#fff';
+            character.style.left = '0px';
+            character.innerHTML = '😊';
+            message.style.display = 'none';
+
+            // 生成30个随机任务图标，分3层
+            for (let i = 0; i < 30; i++) {
+                let task = tasks[Math.floor(Math.random() * tasks.length)];
+                let x = 50 + Math.random() * 500;
+                let y = 50 + Math.random() * 300;
+                let z = Math.floor(Math.random() * 3); // 层级
+                tiles.push({ task, x, y, z, element: null });
+            }
+
+            // 渲染图标
+            tiles.forEach((tile, index) => {
+                let div = document.createElement('div');
+                div.className = 'tile';
+                div.style.left = `${tile.x}px`;
+                div.style.top = `${tile.y}px`;
+                div.style.zIndex = tile.z;
+                div.innerHTML = tile.task.icon;
+                div.dataset.index = index;
+                div.addEventListener('click', handleTileClick);
+                document.getElementById('game-container').appendChild(div);
+                tile.element = div;
+            });
+
+            // 初始化DDL槽
+            slotContainer.innerHTML = '<div id="character">😊</div><div id="ddl-line"></div>';
+            for (let i = 0; i < slotCapacity; i++) {
+                let slot = document.createElement('div');
+                slot.className = 'slot';
+                slotContainer.appendChild(slot);
+            }
+            character = document.getElementById('character');
+        }
+
+        // 处理图标点击
+        function handleTileClick(e) {
+            let index = e.target.dataset.index;
+            let tile = tiles[index];
+
+            // 检查是否被遮挡
+            let isBlocked = tiles.some(other => {
+                if (other.element && other !== tile && other.z >= tile.z) {
+                    let ox = other.x, oy = other.y;
+                    return Math.abs(ox - tile.x) < 50 && Math.abs(oy - tile.y) < 50 && other.z > tile.z;
+                }
+                return false;
+            });
+
+            if (!isBlocked && slots.length < slotCapacity) {
+                // 添加到DDL槽
+                slots.push(tile.task);
+                tile.element.remove();
+                tile.element = null;
+
+                // 更新槽显示
+                updateSlots();
+
+                // 检查三消
+                checkMatches();
+
+                // 检查游戏状态
+                checkGameState();
+            }
+        }
+
+        // 更新DDL槽
+        function updateSlots() {
+            let slotElements = document.querySelectorAll('.slot');
+            slotElements.forEach((slot, i) => {
+                slot.innerHTML = slots[i] ? slots[i].icon : '';
+            });
+
+            // 更新小人
+            let slotCount = slots.length;
+            if (slotCount > 0) {
+                character.style.left = `${80 * (slotCount - 1) + 40}px`;
+                character.innerHTML = slots[slotCount - 1].action;
+            } else {
+                character.style.left = '0px';
+                character.innerHTML = '😊';
+            }
+
+            // 更新表情和槽颜色
+            if (slotCount <= 2) {
+                character.innerHTML = slots[slotCount - 1] ? slots[slotCount - 1].action : '😊';
+                slotContainer.style.backgroundColor = '#fff';
+            } else if (slotCount <= 4) {
+                character.innerHTML = slots[slotCount - 1] ? slots[slotCount - 1].action + '😓' : '😓';
+                slotContainer.style.backgroundColor = '#ffcccc';
+            } else {
+                character.innerHTML = slots[slotCount - 1] ? slots[slotCount - 1].action + '😰' : '😰';
+                slotContainer.style.backgroundColor = slotCount === 7 ? '#ff3333' : '#ff6666';
+            }
+        }
+
+        // 检查三消
+        function checkMatches() {
+            let counts = {};
+            slots.forEach(slot => {
+                counts[slot.icon] = (counts[slot.icon] || 0) + 1;
+            });
+
+            for (let icon in counts) {
+                if (counts[icon] >= 3) {
+                    slots = slots.filter(slot => slot.icon !== icon);
+                    updateSlots();
+                }
+            }
+        }
+
+        // 检查游戏状态
+        function checkGameState() {
+            if (slots.length >= slotCapacity) {
+                // 失败
+                message.innerHTML = 'DDL 已过，下次再交吧！';
+                message.style.display = 'block';
+            } else if (tiles.every(tile => !tile.element)) {
+                // 胜利
+                message.innerHTML = '恭喜你赶上了 DDL！';
+                message.style.display = 'block';
+            }
+        }
+
+        // 重启游戏
+        document.getElementById('restart').addEventListener('click', initGame);
+
+        // 启动游戏
+        initGame();
+    </script>
+</body>
+</html>
