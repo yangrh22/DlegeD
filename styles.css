@@ -30,7 +30,7 @@ h1 {
 }
 .tile {
     position: absolute;
-    width: 64px; /* 从 32px 升级到 64px */
+    width: 64px;
     height: 64px;
     background-size: contain;
     background-color: #ffffff;
@@ -48,7 +48,7 @@ h1 {
     position: relative;
     width: 600px;
     height: 80px;
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     border: 4px solid #fff;
     border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVR4nGNgYGD4//8/AzAzMTMwMDD8DYAZg/z/AQzYgAAAAASUVORK5CYII=') 8;
     margin-top: 10px;
@@ -56,7 +56,7 @@ h1 {
     align-items: center;
 }
 .slot {
-    width: 85px; /* 保持宽度，适配 64px 图标 */
+    width: 85px;
     height: 64px;
     border: 2px dashed #444;
     display: flex;
